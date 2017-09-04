@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/wangs/.p2/pool/plugins/org.eclipse.osgi_3.12.0.v20170512-1932.jar" sourcepath="C:/Users/wangs/.p2/pool/plugins/org.eclipse.osgi_3.12.0.v20170512-1932.jar"/>
+	<classpathentry kind="lib" path="C:/Users/wangs/.p2/pool/plugins/org.eclipse.core.commands_3.9.0.v20170530-1048.jar" sourcepath="C:/Users/wangs/.p2/pool/plugins/org.eclipse.core.commands_3.9.0.v20170530-1048.jar"/>
+	<classpathentry kind="lib" path="C:/Users/wangs/.p2/pool/plugins/org.eclipse.equinox.common_3.9.0.v20170207-1454.jar" sourcepath="C:/Users/wangs/.p2/pool/plugins/org.eclipse.equinox.common_3.9.0.v20170207-1454.jar"/>
+	<classpathentry kind="lib" path="C:/Users/wangs/.p2/pool/plugins/org.eclipse.equinox.registry_3.7.0.v20170222-1344.jar" sourcepath="C:/Users/wangs/.p2/pool/plugins/org.eclipse.equinox.registry_3.7.0.v20170222-1344.jar"/>
+	<classpathentry kind="lib" path="C:/Users/wangs/.p2/pool/plugins/org.eclipse.core.runtime_3.13.0.v20170207-1030.jar" sourcepath="C:/Users/wangs/.p2/pool/plugins/org.eclipse.core.runtime_3.13.0.v20170207-1030.jar"/>
+	<classpathentry kind="lib" path="C:/Users/wangs/.p2/pool/plugins/org.eclipse.text_3.6.100.v20170203-0814.jar" sourcepath="C:/Users/wangs/.p2/pool/plugins/org.eclipse.text_3.6.100.v20170203-0814.jar"/>
+	<classpathentry kind="lib" path="C:/Users/wangs/.p2/pool/plugins/org.eclipse.swt.win32.win32.x86_64_3.106.0.v20170608-0516.jar" sourcepath="C:/Users/wangs/.p2/pool/plugins/org.eclipse.swt.win32.win32.x86_64_3.106.0.v20170608-0516.jar"/>
+	<classpathentry kind="lib" path="C:/Users/wangs/.p2/pool/plugins/org.eclipse.jface_3.13.0.v20170503-1507.jar" sourcepath="C:/Users/wangs/.p2/pool/plugins/org.eclipse.jface_3.13.0.v20170503-1507.jar"/>
+	<classpathentry kind="lib" path="C:/Users/wangs/.p2/pool/plugins/org.eclipse.jface.text_3.12.0.v20170523-1043.jar" sourcepath="C:/Users/wangs/.p2/pool/plugins/org.eclipse.jface.text_3.12.0.v20170523-1043.jar"/>
+	<classpathentry kind="lib" path="C:/Users/wangs/.p2/pool/plugins/org.eclipse.ui.workbench_3.110.0.v20170612-1255.jar" sourcepath="C:/Users/wangs/.p2/pool/plugins/org.eclipse.ui.workbench_3.110.0.v20170612-1255.jar"/>
+	<classpathentry kind="lib" path="C:/Users/wangs/.p2/pool/plugins/com.ibm.icu_58.2.0.v20170418-1837.jar" sourcepath="C:/Users/wangs/.p2/pool/plugins/com.ibm.icu_58.2.0.v20170418-1837.jar"/>
+	<classpathentry kind="lib" path="C:/Users/wangs/.p2/pool/plugins/org.eclipse.ui.forms_3.7.100.v20170517-1755.jar" sourcepath="C:/Users/wangs/.p2/pool/plugins/org.eclipse.ui.forms_3.7.100.v20170517-1755.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.44-bin.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
