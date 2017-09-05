@@ -6,15 +6,21 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import org.eclipse.jface.text.templates.Template;
+import org.eclipse.swt.widgets.Tree;
+
+import com.littleheap.DataBase.GetConnection;
 import com.littleheap.DataBase.SelectTable;
+import com.littleheap.OtherInterface.InsertBook;
 import com.littleheap.OtherInterface.ManagerInterface;
 
 import java.awt.*;
 
 public class MainInterface extends JFrame implements ActionListener{
 
-	public JPanel contentPane;
-	public ManagerInterface managerJPanel;
+	public static JPanel contentPane;
+	public static ManagerInterface managerJPanel = new ManagerInterface();
+	public static InsertBook insertJPanel = new InsertBook();
 	private JTextField tf_user;
 	private JTextField tf_password;
 	private JLabel label_user;
@@ -23,16 +29,39 @@ public class MainInterface extends JFrame implements ActionListener{
 	private JRadioButton rb_manager;
 	private JButton btn_login;
 	private JButton btn_register;
-
+	private JButton btn_changePassword;
+	private static boolean flage_manager = false;
+	private static boolean flage_insert = false;
+	private static boolean flage_newClass = false;
+	private static boolean flage_update = false;
+	private static boolean flage_state = false;
+	private boolean flage = false;
+	private static Container container;
+	
 	public MainInterface() {
+		init();
+	}
+	
+	//初始化窗口
+	public void init() {
+		
+		container = getContentPane();
+//		getContentPane().add(managerJPanel);
+//		managerJPanel.setVisible(false);
+		
 		//初始化主界面
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(800, 400, 1300, 1000);
 		setResizable(false); 
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		this.add(contentPane);
+		
+//		container.add(managerJPanel);/////////////////////////
+//		managerJPanel.setVisible(false);
+		
+		container.add(contentPane);
 		contentPane.setLayout(null);
 		
 		//账号输入框
@@ -97,14 +126,55 @@ public class MainInterface extends JFrame implements ActionListener{
 		contentPane.add(btn_register);
 		
 		btn_register.addActionListener(this);
+		
+		//修改密码按钮
+		btn_changePassword = new JButton("\u4FEE\u6539\u5BC6\u7801");
+		btn_changePassword.setFont(new Font("宋体", Font.BOLD, 30));
+		btn_changePassword.setBackground(Color.LIGHT_GRAY);
+		btn_changePassword.setBounds(1011, 370, 170, 48);
+		contentPane.add(btn_changePassword);
+		
+		btn_changePassword.addActionListener(this);
 	}
-
+	
+	//切换窗口函数
+	public static void MaintoManager() {
+		if(!flage_manager) {
+			contentPane.setVisible(false);//////////
+			container.add(managerJPanel);///////////
+			flage_manager = true;
+		}else {
+			contentPane.setVisible(false);
+			managerJPanel.setVisible(true);
+		}
+	}
+	
+	public static void ManagertoMain() {
+		managerJPanel.setVisible(false);
+		contentPane.setVisible(true);
+	}
+	
+	public static void ManagertoInsert() {
+		if(!flage_insert) {
+			managerJPanel.setVisible(false);
+			container.add(insertJPanel);
+			flage_insert = true;
+		}else {
+			managerJPanel.setVisible(false);
+			insertJPanel.setVisible(true);
+		}
+	}
+	
+	public static void InserttoManager() {
+		insertJPanel.setVisible(false);
+		managerJPanel.setVisible(true);
+	}
+	
 	//登录注册事件函数
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == btn_login) {
-			System.out.println("aaaaaaaa");
 			//点击登录按钮
 			//判定用户名密码是否为空
 			if (tf_user.getText().equals("")) {
@@ -126,16 +196,13 @@ public class MainInterface extends JFrame implements ActionListener{
 					boolean isExist = SelectTable.isExist_Manager(tf_user.getText(), tf_password.getText());
 					if(isExist) {
 						JOptionPane.showMessageDialog(null, "欢迎使用", "管理员登录成功", JOptionPane.OK_CANCEL_OPTION);
-						this.contentPane.setVisible(false);
-						managerJPanel = new ManagerInterface();
-						this.add(managerJPanel);
+						MaintoManager();
 					}else {
 						JOptionPane.showMessageDialog(null, "请输入正确的用户名密码", "管理员登录失败", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
 		}else if(e.getSource() == btn_register) {
-			System.out.println("bbbbbbb");
 			//点击注册按钮
 			//判定用户名密码是否为空
 			if (tf_user.getText().equals("")) {
@@ -145,7 +212,7 @@ public class MainInterface extends JFrame implements ActionListener{
 			}else {
 				//判定是用户还是管理员
 				if(rb_customer.isSelected()) {
-					boolean isExist = SelectTable.isExist_Customer(tf_user.getText(), tf_password.getText());
+					boolean isExist = SelectTable.isExist_Customer_user(tf_user.getText(), tf_password.getText());
 					if(isExist) {
 						JOptionPane.showMessageDialog(null, "该用户已经存在", "用户注册失败", JOptionPane.ERROR_MESSAGE);
 					}else {
@@ -153,7 +220,7 @@ public class MainInterface extends JFrame implements ActionListener{
 						SelectTable.regist_Customer(tf_user.getText(),  tf_password.getText());
 					}
 				}else {
-					boolean isExist = SelectTable.isExist_Manager(tf_user.getText(), tf_password.getText());
+					boolean isExist = SelectTable.isExist_Manager_user(tf_user.getText(), tf_password.getText());
 					if(isExist) {
 						JOptionPane.showMessageDialog(null, "该管理员已经存在", "管理员注册失败", JOptionPane.ERROR_MESSAGE);
 					}else {
@@ -162,6 +229,44 @@ public class MainInterface extends JFrame implements ActionListener{
 					}
 				}
 			}
+		} else if(e.getSource() == btn_changePassword) {
+			if (tf_user.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "用户名不能为空", "修改失败", JOptionPane.ERROR_MESSAGE);
+			} else if (tf_password.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "密码不能为空", "修改失败", JOptionPane.ERROR_MESSAGE);
+			}else {
+				//判定是用户还是管理员
+				if(rb_customer.isSelected()) {
+					//用户
+					boolean isExist = SelectTable.isExist_Customer(tf_user.getText(), tf_password.getText());
+					if(isExist) {
+						String newPassword = JOptionPane.showInputDialog("请输入新密码");
+						if (!newPassword.equals("")) {
+							SelectTable.changePassword_Customer(tf_user.getText(), tf_password.getText(), newPassword);
+							JOptionPane.showMessageDialog(null, "欢迎使用", "修改密码成功", JOptionPane.OK_CANCEL_OPTION);
+						}else {
+							JOptionPane.showMessageDialog(null, "密码不能为空", "修改密码失败", JOptionPane.ERROR_MESSAGE);
+						}
+					}else {
+						JOptionPane.showMessageDialog(null, "请输入正确的用户名密码", "修改密码失败", JOptionPane.ERROR_MESSAGE);
+					}
+				}else {
+					//管理员
+					boolean isExist = SelectTable.isExist_Manager(tf_user.getText(), tf_password.getText());
+					if(isExist) {
+						String newPassword = JOptionPane.showInputDialog("请输入新密码");
+						if (!newPassword.equals("")) {
+							SelectTable.changePassword_Manager(tf_user.getText(), tf_password.getText(), newPassword);
+							JOptionPane.showMessageDialog(null, "欢迎使用", "修改密码成功", JOptionPane.OK_CANCEL_OPTION);
+						}else {
+							JOptionPane.showMessageDialog(null, "密码不能为空", "修改密码失败", JOptionPane.ERROR_MESSAGE);
+						}
+					}else {
+						JOptionPane.showMessageDialog(null, "请输入正确的用户名密码", "修改密码失败", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			}
+			
 		}
 	}
 }

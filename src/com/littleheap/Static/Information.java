@@ -1,6 +1,7 @@
 package com.littleheap.Static;
 
 public class Information {
+
 	
 	public static String username = "root";
 	
