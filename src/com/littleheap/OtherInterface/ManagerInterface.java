@@ -74,11 +74,11 @@ public class ManagerInterface extends JPanel implements ActionListener{
 		}else if(e.getSource() == btn_insertBook){
 			MainInterface.ManagertoInsert();
 		}else if(e.getSource() == btn_newClass) {
-			
+			MainInterface.ManagertoNewClass();
 		}else if(e.getSource() == btn_updateBook) {
-			
+			MainInterface.ManagertoUpdate();
 		}else if(e.getSource() == btn_state) {
-			
+			MainInterface.ManagertoState();
 		}
 		
 	}

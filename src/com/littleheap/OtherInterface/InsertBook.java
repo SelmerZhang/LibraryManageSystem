@@ -40,7 +40,7 @@ public class InsertBook extends JPanel implements ActionListener{
 		setBackground(Color.PINK);
 		setLayout(null);
 		
-		JLabel label = new JLabel("\u5F55\u5165\u754C\u9762");
+		JLabel label = new JLabel("\u65B0\u4E66\u5F55\u5165");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("ËÎÌו", Font.BOLD, 40));
 		label.setBounds(530, 20, 294, 105);

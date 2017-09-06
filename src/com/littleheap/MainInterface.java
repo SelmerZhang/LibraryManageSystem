@@ -13,6 +13,10 @@ import com.littleheap.DataBase.GetConnection;
 import com.littleheap.DataBase.SelectTable;
 import com.littleheap.OtherInterface.InsertBook;
 import com.littleheap.OtherInterface.ManagerInterface;
+import com.littleheap.OtherInterface.NewClass;
+import com.littleheap.OtherInterface.State;
+import com.littleheap.OtherInterface.State_Information;
+import com.littleheap.OtherInterface.UpdateBook;
 
 import java.awt.*;
 
@@ -21,6 +25,10 @@ public class MainInterface extends JFrame implements ActionListener{
 	public static JPanel contentPane;
 	public static ManagerInterface managerJPanel = new ManagerInterface();
 	public static InsertBook insertJPanel = new InsertBook();
+	public static NewClass newJPanel = new NewClass();
+	public static UpdateBook updateJPanel = new UpdateBook();
+	public static State stateJPanel = new State();
+	public static State_Information stateInfoJPanel = new State_Information();
 	private JTextField tf_user;
 	private JTextField tf_password;
 	private JLabel label_user;
@@ -35,8 +43,10 @@ public class MainInterface extends JFrame implements ActionListener{
 	private static boolean flage_newClass = false;
 	private static boolean flage_update = false;
 	private static boolean flage_state = false;
+	private static boolean flage_stateInfo = false;
 	private boolean flage = false;
 	private static Container container;
+	private JLabel label;
 	
 	public MainInterface() {
 		init();
@@ -45,22 +55,16 @@ public class MainInterface extends JFrame implements ActionListener{
 	//初始化窗口
 	public void init() {
 		
+		//获取主界面容器
 		container = getContentPane();
-//		getContentPane().add(managerJPanel);
-//		managerJPanel.setVisible(false);
 		
 		//初始化主界面
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(800, 400, 1300, 1000);
 		setResizable(false); 
-		
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		
-//		container.add(managerJPanel);/////////////////////////
-//		managerJPanel.setVisible(false);
-		
 		container.add(contentPane);
 		contentPane.setLayout(null);
 		
@@ -134,10 +138,17 @@ public class MainInterface extends JFrame implements ActionListener{
 		btn_changePassword.setBounds(1011, 370, 170, 48);
 		contentPane.add(btn_changePassword);
 		
+		label = new JLabel("\u56FE\u4E66\u7BA1\u7406\u7CFB\u7EDF");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("宋体", Font.BOLD, 40));
+		label.setBounds(530, 20, 294, 105);
+		contentPane.add(label);
+		
 		btn_changePassword.addActionListener(this);
 	}
 	
 	//切换窗口函数
+	//Main->Manager
 	public static void MaintoManager() {
 		if(!flage_manager) {
 			contentPane.setVisible(false);//////////
@@ -148,12 +159,13 @@ public class MainInterface extends JFrame implements ActionListener{
 			managerJPanel.setVisible(true);
 		}
 	}
-	
+	//Manager->Main
 	public static void ManagertoMain() {
 		managerJPanel.setVisible(false);
 		contentPane.setVisible(true);
 	}
 	
+	//Manager->Insert
 	public static void ManagertoInsert() {
 		if(!flage_insert) {
 			managerJPanel.setVisible(false);
@@ -164,10 +176,78 @@ public class MainInterface extends JFrame implements ActionListener{
 			insertJPanel.setVisible(true);
 		}
 	}
-	
+	//Insert->Manager
 	public static void InserttoManager() {
 		insertJPanel.setVisible(false);
 		managerJPanel.setVisible(true);
+	}
+	
+	//Manager->NewClass
+	public static void ManagertoNewClass() {
+		if(!flage_newClass) {
+			managerJPanel.setVisible(false);
+			container.add(newJPanel);
+			flage_newClass = true;
+		}else {
+			managerJPanel.setVisible(false);
+			newJPanel.setVisible(true);
+		}
+	}
+	//NewClass->Manager
+	public static void NewClasstoManager() {
+		newJPanel.setVisible(false);
+		managerJPanel.setVisible(true);
+	}
+	
+	//Manager->UpdateBook
+	public static void ManagertoUpdate() {
+		if(!flage_update) {
+			managerJPanel.setVisible(false);
+			container.add(updateJPanel);
+			flage_update = true;
+		}else {
+			managerJPanel.setVisible(false);
+			updateJPanel.setVisible(true);
+		}
+	}
+	//UpdateBook->Manager
+	public static void UpdatetoManager() {
+		updateJPanel.setVisible(false);
+		managerJPanel.setVisible(true);
+	}
+	
+	//Manager->State
+	public static void ManagertoState() {
+		if(!flage_state) {
+			managerJPanel.setVisible(false);
+			container.add(stateJPanel);
+			flage_state = true;
+		}else {
+			managerJPanel.setVisible(false);
+			stateJPanel.setVisible(true);
+		}
+	}
+	//State->Manager
+	public static void StatetoManager() {
+		stateJPanel.setVisible(false);
+		managerJPanel.setVisible(true);
+	}
+		
+	//State->StateInfo
+	public static void StatetoStateInfo() {
+		if(!flage_stateInfo) {
+			stateJPanel.setVisible(false);
+			container.add(stateInfoJPanel);
+			flage_stateInfo = true;
+		}else {
+			stateJPanel.setVisible(false);
+			stateInfoJPanel.setVisible(true);
+		}
+	}
+	//StateInfo->State
+	public static void StateInfotoState() {
+		stateInfoJPanel.setVisible(false);
+		stateJPanel.setVisible(true);
 	}
 	
 	//登录注册事件函数
