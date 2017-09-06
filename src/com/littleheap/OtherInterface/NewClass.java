@@ -41,24 +41,24 @@ public class NewClass extends JPanel implements ActionListener {
 		
 		lb_classnumber = new JLabel("\u5206\u7C7B\u7F16\u53F7\uFF1A");
 		lb_classnumber.setFont(new Font("宋体", Font.BOLD, 35));
-		lb_classnumber.setBounds(391, 260, 194, 55);
+		lb_classnumber.setBounds(361, 260, 194, 55);
 		add(lb_classnumber);
 		
 		tf_classnumber = new JTextField();
 		tf_classnumber.setFont(new Font("宋体", Font.BOLD, 35));
 		tf_classnumber.setColumns(10);
-		tf_classnumber.setBounds(585, 250, 399, 75);
+		tf_classnumber.setBounds(555, 250, 399, 75);
 		add(tf_classnumber);
 		
 		tf_classname = new JTextField();
 		tf_classname.setFont(new Font("宋体", Font.BOLD, 35));
 		tf_classname.setColumns(10);
-		tf_classname.setBounds(585, 431, 399, 75);
+		tf_classname.setBounds(555, 431, 399, 75);
 		add(tf_classname);
 		
 		lb_classname = new JLabel("\u5206\u7C7B\u540D\u79F0\uFF1A");
 		lb_classname.setFont(new Font("宋体", Font.BOLD, 35));
-		lb_classname.setBounds(391, 441, 194, 55);
+		lb_classname.setBounds(361, 441, 194, 55);
 		add(lb_classname);
 		
 		btn_submit = new JButton("\u63D0\u4EA4");
