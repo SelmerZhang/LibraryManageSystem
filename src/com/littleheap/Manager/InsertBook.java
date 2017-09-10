@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.SwingConstants;
 
 import com.littleheap.MainInterface;
-import com.littleheap.DataBase.SelectTable;
+import com.littleheap.DataBase.TableOperate;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -152,7 +152,7 @@ public class InsertBook extends JPanel implements ActionListener{
 			String total = tf_total.getText();
 			
 			//插入书籍信息
-			SelectTable.insertBook(number, classnumber, name, classname, price, state, total);
+			TableOperate.insertBook(number, classnumber, name, classname, price, state, total);
 			
 			tf_number.setText("");
 			tf_classnumber.setText("");

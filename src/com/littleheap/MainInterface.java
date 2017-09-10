@@ -9,8 +9,7 @@ import javax.swing.border.EmptyBorder;
 import org.eclipse.jface.text.templates.Template;
 import org.eclipse.swt.widgets.Tree;
 
-import com.littleheap.DataBase.GetConnection;
-import com.littleheap.DataBase.SelectTable;
+import com.littleheap.DataBase.TableOperate;
 import com.littleheap.Manager.InsertBook;
 import com.littleheap.Manager.ManagerInterface;
 import com.littleheap.Manager.NewClass;
@@ -18,20 +17,30 @@ import com.littleheap.Manager.State;
 import com.littleheap.Manager.State_Information;
 import com.littleheap.Manager.UpdateBook;
 import com.littleheap.Static.Information;
+import com.littleheap.User.BorrowBook;
+import com.littleheap.User.BorrowBook_Information;
+import com.littleheap.User.ReturnBook;
 import com.littleheap.User.UserInterface;
 
 import java.awt.*;
 
 public class MainInterface extends JFrame implements ActionListener{
 
+	//Main窗口
 	public static JPanel contentPane;
+	//Manager窗口
 	public static ManagerInterface managerJPanel = new ManagerInterface();
 	public static InsertBook insertJPanel = new InsertBook();
 	public static NewClass newJPanel = new NewClass();
 	public static UpdateBook updateJPanel = new UpdateBook();
 	public static State stateJPanel = new State();
 	public static State_Information stateInfoJPanel = new State_Information();
+	//User窗口
 	public static UserInterface userJPanel = new UserInterface();
+	public static BorrowBook borrowJPanel = new BorrowBook();
+	public static BorrowBook_Information borrowInfoJPanel = new BorrowBook_Information();
+	public static ReturnBook returnJPanel = new ReturnBook();
+	
 	private JTextField tf_user;
 	private JTextField tf_password;
 	private JLabel label_user;
@@ -48,6 +57,9 @@ public class MainInterface extends JFrame implements ActionListener{
 	private static boolean flage_state = false;
 	private static boolean flage_stateInfo = false;
 	private static boolean flage_user = false;
+	private static boolean flage_borrow = false;
+	private static boolean flage_borrowInfo = false;
+	private static boolean flage_return = false;
 	private boolean flage = false;
 	private static Container container;
 	private JLabel label;
@@ -155,8 +167,8 @@ public class MainInterface extends JFrame implements ActionListener{
 	//Main->Manager
 	public static void MaintoManager() {
 		if(!flage_manager) {
-			contentPane.setVisible(false);//////////
-			container.add(managerJPanel);///////////
+			contentPane.setVisible(false);
+			container.add(managerJPanel);
 			flage_manager = true;
 		}else {
 			contentPane.setVisible(false);
@@ -254,21 +266,70 @@ public class MainInterface extends JFrame implements ActionListener{
 		stateJPanel.setVisible(true);
 	}
 	//Main->User
-		public static void MaintoUser() {
-			if(!flage_user) {
-				contentPane.setVisible(false);
-				container.add(userJPanel);
-				flage_user = true;
-			}else {
-				contentPane.setVisible(false);
-				userJPanel.setVisible(true);
-			}
+	public static void MaintoUser() {
+		if(!flage_user) {
+			contentPane.setVisible(false);
+			container.add(userJPanel);
+			flage_user = true;
+		}else {
+			contentPane.setVisible(false);
+			userJPanel.setVisible(true);
 		}
-		//User->Main
-		public static void UsertoMain() {
+	}
+	//User->Main
+	public static void UsertoMain() {
+		userJPanel.setVisible(false);
+		contentPane.setVisible(true);
+	}
+	//User->Borrow
+	public static void UsertoBorrow() {
+		if(!flage_borrow) {
 			userJPanel.setVisible(false);
-			contentPane.setVisible(true);
+			container.add(borrowJPanel);
+			flage_borrow = true;
+		}else {
+			userJPanel.setVisible(false);
+			borrowJPanel.setVisible(true);
 		}
+	}
+	//Borrow->User
+	public static void BorrowtoUser() {
+		borrowJPanel.setVisible(false);
+		userJPanel.setVisible(true);
+	}
+	//Borrow->BorrowInfo
+	public static void BorrowtoBorrowInfo() {
+		if(!flage_borrowInfo) {
+			borrowJPanel.setVisible(false);
+			container.add(borrowInfoJPanel);
+			flage_borrowInfo = true;
+		}else {
+			borrowJPanel.setVisible(false);
+			borrowInfoJPanel.setVisible(true);
+		}
+	}
+	//BorrowInfo->Borrow
+	public static void BorrowInfotoBorrow() {
+		borrowInfoJPanel.setVisible(false);
+		borrowJPanel.setVisible(true);
+	}
+	//User->Return
+	public static void UsertoReturn() {
+		if(!flage_return) {
+			userJPanel.setVisible(false);
+			container.add(returnJPanel);
+			flage_return = true;
+		}else {
+			userJPanel.setVisible(false);
+			returnJPanel.setVisible(true);
+		}
+	}
+	//Borrow->User
+	public static void ReturentoUser() {
+		returnJPanel.setVisible(false);
+		userJPanel.setVisible(true);
+	}
+	
 		
 	//登录注册事件函数
 	@Override
@@ -285,7 +346,7 @@ public class MainInterface extends JFrame implements ActionListener{
 				//判定是用户还是管理员
 				if(rb_customer.isSelected()) {
 					//用户
-					boolean isExist = SelectTable.isExist_Customer(tf_user.getText(), tf_password.getText());
+					boolean isExist = TableOperate.isExist_Customer(tf_user.getText(), tf_password.getText());
 					if(isExist) {
 						JOptionPane.showMessageDialog(null, "欢迎使用", "用户登录成功", JOptionPane.OK_CANCEL_OPTION);
 						Information.user = tf_user.getText();
@@ -296,7 +357,7 @@ public class MainInterface extends JFrame implements ActionListener{
 					}
 				}else {
 					//管理员
-					boolean isExist = SelectTable.isExist_Manager(tf_user.getText(), tf_password.getText());
+					boolean isExist = TableOperate.isExist_Manager(tf_user.getText(), tf_password.getText());
 					if(isExist) {
 						JOptionPane.showMessageDialog(null, "欢迎使用", "管理员登录成功", JOptionPane.OK_CANCEL_OPTION);
 						Information.manager = tf_user.getText();
@@ -317,20 +378,21 @@ public class MainInterface extends JFrame implements ActionListener{
 			}else {
 				//判定是用户还是管理员
 				if(rb_customer.isSelected()) {
-					boolean isExist = SelectTable.isExist_Customer_user(tf_user.getText(), tf_password.getText());
+					boolean isExist = TableOperate.isExist_Customer_user(tf_user.getText(), tf_password.getText());
 					if(isExist) {
 						JOptionPane.showMessageDialog(null, "该用户已经存在", "用户注册失败", JOptionPane.ERROR_MESSAGE);
 					}else {
 						JOptionPane.showMessageDialog(null, "欢迎！", "用户注册成功", JOptionPane.OK_CANCEL_OPTION);
-						SelectTable.regist_Customer(tf_user.getText(),  tf_password.getText());
+						TableOperate.regist_Customer(tf_user.getText(),  tf_password.getText());
+						TableOperate.newCustomer(tf_user.getText());
 					}
 				}else {
-					boolean isExist = SelectTable.isExist_Manager_user(tf_user.getText(), tf_password.getText());
+					boolean isExist = TableOperate.isExist_Manager_user(tf_user.getText(), tf_password.getText());
 					if(isExist) {
 						JOptionPane.showMessageDialog(null, "该管理员已经存在", "管理员注册失败", JOptionPane.ERROR_MESSAGE);
 					}else {
 						JOptionPane.showMessageDialog(null, "欢迎！", "管理员注册成功", JOptionPane.OK_CANCEL_OPTION);
-						SelectTable.regist_Manager(tf_user.getText(),  tf_password.getText());
+						TableOperate.regist_Manager(tf_user.getText(),  tf_password.getText());
 					}
 				}
 			}
@@ -343,11 +405,11 @@ public class MainInterface extends JFrame implements ActionListener{
 				//判定是用户还是管理员
 				if(rb_customer.isSelected()) {
 					//用户
-					boolean isExist = SelectTable.isExist_Customer(tf_user.getText(), tf_password.getText());
+					boolean isExist = TableOperate.isExist_Customer(tf_user.getText(), tf_password.getText());
 					if(isExist) {
 						String newPassword = JOptionPane.showInputDialog("请输入新密码");
 						if (!newPassword.equals("")) {
-							SelectTable.changePassword_Customer(tf_user.getText(), tf_password.getText(), newPassword);
+							TableOperate.changePassword_Customer(tf_user.getText(), tf_password.getText(), newPassword);
 							JOptionPane.showMessageDialog(null, "欢迎使用", "修改密码成功", JOptionPane.OK_CANCEL_OPTION);
 						}else {
 							JOptionPane.showMessageDialog(null, "密码不能为空", "修改密码失败", JOptionPane.ERROR_MESSAGE);
@@ -357,11 +419,11 @@ public class MainInterface extends JFrame implements ActionListener{
 					}
 				}else {
 					//管理员
-					boolean isExist = SelectTable.isExist_Manager(tf_user.getText(), tf_password.getText());
+					boolean isExist = TableOperate.isExist_Manager(tf_user.getText(), tf_password.getText());
 					if(isExist) {
 						String newPassword = JOptionPane.showInputDialog("请输入新密码");
 						if (!newPassword.equals("")) {
-							SelectTable.changePassword_Manager(tf_user.getText(), tf_password.getText(), newPassword);
+							TableOperate.changePassword_Manager(tf_user.getText(), tf_password.getText(), newPassword);
 							JOptionPane.showMessageDialog(null, "欢迎使用", "修改密码成功", JOptionPane.OK_CANCEL_OPTION);
 						}else {
 							JOptionPane.showMessageDialog(null, "密码不能为空", "修改密码失败", JOptionPane.ERROR_MESSAGE);

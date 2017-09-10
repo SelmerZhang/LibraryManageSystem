@@ -1,4 +1,4 @@
-package com.littleheap.Manager;
+package com.littleheap.User;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -16,7 +16,7 @@ import com.littleheap.Static.Information;
 
 import javax.swing.JTextField;
 
-public class State extends JPanel implements ActionListener{
+public class BorrowBook extends JPanel implements ActionListener{
 	private JLabel label;
 	private JButton back;
 	private JTextField tf_classname;
@@ -26,7 +26,7 @@ public class State extends JPanel implements ActionListener{
 	/**
 	 * Create the panel.
 	 */
-	public State() {
+	public BorrowBook() {
 		setBackground(new Color(250, 250, 210));
 		setLayout(null);
 		
@@ -36,7 +36,7 @@ public class State extends JPanel implements ActionListener{
 		add(back);
 		back.addActionListener(this);
 		
-		label = new JLabel("\u56FE\u4E66\u5E93\u72B6\u6001\u67E5\u8BE2");
+		label = new JLabel("\u501F\u4E66\u7CFB\u7EDF");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("ËÎÌו", Font.BOLD, 40));
 		label.setBounds(530, 20, 294, 105);
@@ -65,7 +65,7 @@ public class State extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == back) {
-			MainInterface.StatetoManager();
+			MainInterface.BorrowtoUser();
 		}else if(e.getSource() == btn_search) {
 			
 			String classname = tf_classname.getText();
@@ -78,9 +78,9 @@ public class State extends JPanel implements ActionListener{
 			
 			System.out.print(Information.bookarray.size());
 			
-			MainInterface.StatetoStateInfo();
+			MainInterface.BorrowtoBorrowInfo();
 			
-			State_Information.setTextArea();
+			BorrowBook_Information.setTextArea();
 			
 			tf_classname.setText("");
 			

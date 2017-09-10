@@ -12,7 +12,7 @@ import javax.swing.SwingConstants;
 import org.eclipse.swt.internal.win32.TF_DA_COLOR;
 
 import com.littleheap.MainInterface;
-import com.littleheap.DataBase.SelectTable;
+import com.littleheap.DataBase.TableOperate;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -81,7 +81,7 @@ public class NewClass extends JPanel implements ActionListener {
 		if(e.getSource() == back) {
 			MainInterface.NewClasstoManager();
 		}else if(e.getSource() == btn_submit){
-			SelectTable.newClass(tf_classnumber.getText(), tf_classname.getText());
+			TableOperate.newClass(tf_classnumber.getText(), tf_classname.getText());
 			tf_classnumber.setText("");
 			tf_classname.setText("");
 		}

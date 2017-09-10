@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.SwingConstants;
 
 import com.littleheap.MainInterface;
-import com.littleheap.DataBase.SelectTable;
+import com.littleheap.DataBase.TableOperate;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -175,9 +175,9 @@ public class UpdateBook extends JPanel implements ActionListener {
 			String state = tf_new_state.getText();
 			
 			//删除旧书籍信息
-			SelectTable.deleteBook(old_number, old_classname);
+			TableOperate.deleteBook(old_number, old_classname);
 			//插入新书籍信息
-			SelectTable.insertBook(number, classnumber, name, classname, price, state, "1");
+			TableOperate.insertBook(number, classnumber, name, classname, price, state, "1");
 			
 			tf_old_classname.setText("");
 			tf_old_number.setText("");
