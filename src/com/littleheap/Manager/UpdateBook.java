@@ -1,4 +1,4 @@
-package com.littleheap.OtherInterface;
+package com.littleheap.Manager;
 
 import javax.swing.JPanel;
 import java.awt.Color;

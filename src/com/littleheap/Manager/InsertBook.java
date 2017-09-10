@@ -1,4 +1,4 @@
-package com.littleheap.OtherInterface;
+package com.littleheap.Manager;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -43,7 +43,7 @@ public class InsertBook extends JPanel implements ActionListener{
 		JLabel label = new JLabel("\u65B0\u4E66\u5F55\u5165");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("ËÎÌו", Font.BOLD, 40));
-		label.setBounds(530, 20, 294, 105);
+		label.setBounds(530, 0, 294, 105);
 		add(label);
 		
 		lb_number = new JLabel("\u7F16\u53F7\uFF1A");

@@ -318,7 +318,7 @@ public class SelectTable {
             Statement stmt = conn.createStatement(); //创建Statement对象
             System.out.println("成功连接到数据库-insertBook");
 
-            String sql = "insert into "+classname+"Book"+" values('"+number+"','"+classnumber+"','"+name+"','"+classname+"','"+price+"','"+state+"','"+total+"');";    //要执行的SQL
+            String sql = "insert into "+classname+"Book"+" values('"+number+"','"+classnumber+"','"+name+"','"+classname+"','"+price+"','"+state+"','"+total+"',null,null,null);";    //要执行的SQL
             
             PreparedStatement stmts = conn.prepareStatement(sql);
             stmts.executeUpdate();  
@@ -346,7 +346,7 @@ public class SelectTable {
             Statement stmt = conn.createStatement(); //创建Statement对象
             System.out.println("成功连接到数据库-newClass");
 
-            String sql = "CREATE TABLE "+classname+"Book(number VARCHAR(255) primary key,classnumber VARCHAR(255),name VARCHAR(255),classname VARCHAR(255),price VARCHAR(255),state VARCHAR(255),total VARCHAR(255) );";    //要执行的SQL
+            String sql = "CREATE TABLE "+classname+"Book(number VARCHAR(255) primary key,classnumber VARCHAR(255),name VARCHAR(255),classname VARCHAR(255),price VARCHAR(255),state VARCHAR(255),total VARCHAR(255),current VARCHAR(255),dateon VARCHAR(255),dateoff VARCHAR(255));";    //要执行的SQL
             
             PreparedStatement stmts = conn.prepareStatement(sql);
             stmts.executeUpdate();  
@@ -415,6 +415,9 @@ public class SelectTable {
                     book.price = rs.getString(5);
                     book.state = rs.getString(6);
                     book.total = rs.getString(7);
+                    book.current = rs.getString(8);
+                    book.dateon = rs.getString(9);
+                    book.dateoff = rs.getString(10);
                     Information.bookarray.add(book);
                 }
                 rs.close();

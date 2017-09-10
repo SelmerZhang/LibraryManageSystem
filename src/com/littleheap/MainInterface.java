@@ -11,12 +11,14 @@ import org.eclipse.swt.widgets.Tree;
 
 import com.littleheap.DataBase.GetConnection;
 import com.littleheap.DataBase.SelectTable;
-import com.littleheap.OtherInterface.InsertBook;
-import com.littleheap.OtherInterface.ManagerInterface;
-import com.littleheap.OtherInterface.NewClass;
-import com.littleheap.OtherInterface.State;
-import com.littleheap.OtherInterface.State_Information;
-import com.littleheap.OtherInterface.UpdateBook;
+import com.littleheap.Manager.InsertBook;
+import com.littleheap.Manager.ManagerInterface;
+import com.littleheap.Manager.NewClass;
+import com.littleheap.Manager.State;
+import com.littleheap.Manager.State_Information;
+import com.littleheap.Manager.UpdateBook;
+import com.littleheap.Static.Information;
+import com.littleheap.User.UserInterface;
 
 import java.awt.*;
 
@@ -29,6 +31,7 @@ public class MainInterface extends JFrame implements ActionListener{
 	public static UpdateBook updateJPanel = new UpdateBook();
 	public static State stateJPanel = new State();
 	public static State_Information stateInfoJPanel = new State_Information();
+	public static UserInterface userJPanel = new UserInterface();
 	private JTextField tf_user;
 	private JTextField tf_password;
 	private JLabel label_user;
@@ -44,6 +47,7 @@ public class MainInterface extends JFrame implements ActionListener{
 	private static boolean flage_update = false;
 	private static boolean flage_state = false;
 	private static boolean flage_stateInfo = false;
+	private static boolean flage_user = false;
 	private boolean flage = false;
 	private static Container container;
 	private JLabel label;
@@ -249,7 +253,23 @@ public class MainInterface extends JFrame implements ActionListener{
 		stateInfoJPanel.setVisible(false);
 		stateJPanel.setVisible(true);
 	}
-	
+	//Main->User
+		public static void MaintoUser() {
+			if(!flage_user) {
+				contentPane.setVisible(false);
+				container.add(userJPanel);
+				flage_user = true;
+			}else {
+				contentPane.setVisible(false);
+				userJPanel.setVisible(true);
+			}
+		}
+		//User->Main
+		public static void UsertoMain() {
+			userJPanel.setVisible(false);
+			contentPane.setVisible(true);
+		}
+		
 	//登录注册事件函数
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -268,6 +288,9 @@ public class MainInterface extends JFrame implements ActionListener{
 					boolean isExist = SelectTable.isExist_Customer(tf_user.getText(), tf_password.getText());
 					if(isExist) {
 						JOptionPane.showMessageDialog(null, "欢迎使用", "用户登录成功", JOptionPane.OK_CANCEL_OPTION);
+						Information.user = tf_user.getText();
+						UserInterface.setUser();
+						MaintoUser();
 					}else {
 						JOptionPane.showMessageDialog(null, "请输入正确的用户名密码", "用户登录失败", JOptionPane.ERROR_MESSAGE);
 					}
@@ -276,6 +299,8 @@ public class MainInterface extends JFrame implements ActionListener{
 					boolean isExist = SelectTable.isExist_Manager(tf_user.getText(), tf_password.getText());
 					if(isExist) {
 						JOptionPane.showMessageDialog(null, "欢迎使用", "管理员登录成功", JOptionPane.OK_CANCEL_OPTION);
+						Information.manager = tf_user.getText();
+						ManagerInterface.setManager();
 						MaintoManager();
 					}else {
 						JOptionPane.showMessageDialog(null, "请输入正确的用户名密码", "管理员登录失败", JOptionPane.ERROR_MESSAGE);

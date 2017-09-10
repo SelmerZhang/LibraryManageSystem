@@ -1,4 +1,4 @@
-package com.littleheap.OtherInterface;
+package com.littleheap.Manager;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -72,14 +72,15 @@ public class State extends JPanel implements ActionListener{
 			
 			Information.search_classname = classname;
 			
-			MainInterface.StatetoStateInfo();
-			
 			//查询该类图书信息
 			
 			SelectTable.search_classname(tf_classname.getText());
 			
 			System.out.print(Information.bookarray.size());
 			
+			MainInterface.StatetoStateInfo();
+			
+			State_Information.setTextArea();
 			
 			tf_classname.setText("");
 			

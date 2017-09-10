@@ -1,10 +1,11 @@
-package com.littleheap.OtherInterface;
+package com.littleheap.Manager;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import com.littleheap.MainInterface;
+import com.littleheap.Static.Information;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -20,6 +21,7 @@ public class ManagerInterface extends JPanel implements ActionListener{
 	private JButton btn_state;
 	private JButton btn_newClass;
 	private JButton btn_updateBook;
+	private static JLabel lb_manager;
 
 	/**
 	 * Create the panel.
@@ -63,9 +65,19 @@ public class ManagerInterface extends JPanel implements ActionListener{
 		btn_state.setBounds(995, 241, 280, 505);
 		add(btn_state);
 		btn_state.addActionListener(this);
+		
+		lb_manager = new JLabel("New label");
+		lb_manager.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_manager.setFont(new Font("宋体", Font.BOLD, 28));
+		lb_manager.setBounds(954, 0, 348, 56);
+		add(lb_manager);
 
 	}
 
+	public static void setManager() {
+		lb_manager.setText("当前管理员："+Information.manager);
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -82,5 +94,4 @@ public class ManagerInterface extends JPanel implements ActionListener{
 		}
 		
 	}
-
 }

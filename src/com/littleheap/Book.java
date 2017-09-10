@@ -8,4 +8,7 @@ public class Book {
 	public String price;
 	public String state;
 	public String total;
+	public String current;
+	public String dateon;
+	public String dateoff;
 }
