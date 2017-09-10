@@ -101,6 +101,8 @@ public class ReturnBook extends JPanel implements ActionListener{
 			TableOperate.returnBook_Update(classname, number, Information.user, today);
 			TableOperate.returnBook_Delete(number, Information.user);
 			
+			MainInterface.ReturentoUser();
+			
 		}
 	}
 }
