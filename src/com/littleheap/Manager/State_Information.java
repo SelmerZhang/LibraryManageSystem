@@ -33,7 +33,7 @@ public class State_Information extends JPanel implements ActionListener {
 		
 		textArea = new JTextArea();
 		textArea.setFont(new Font("Monospaced", Font.PLAIN, 20));
-		textArea.setBounds(152, 35, 1015, 863);
+		textArea.setBounds(152, 35, 1085, 863);
 		add(textArea);
 		
 		textArea.setEditable(false);
@@ -54,7 +54,10 @@ public class State_Information extends JPanel implements ActionListener {
             }			
             info = info+"      "+Information.bookarray.get(i).classname+"       ";
             info = info+Information.bookarray.get(i).price+"        ";
-            info = info+Information.bookarray.get(i).state+"       ";
+            info = info+Information.bookarray.get(i).state;
+            for(int j=0;j<(9-Information.bookarray.get(i).state.length());j++) {
+            	info = info +" ";
+            }		
             info = info+Information.bookarray.get(i).current+"      ";
             info = info+Information.bookarray.get(i).dateoff+"\n";
             

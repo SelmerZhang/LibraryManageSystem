@@ -19,6 +19,8 @@ import com.littleheap.Manager.UpdateBook;
 import com.littleheap.Static.Information;
 import com.littleheap.User.BorrowBook;
 import com.littleheap.User.BorrowBook_Information;
+import com.littleheap.User.PersonalInformation;
+import com.littleheap.User.ProlongBook;
 import com.littleheap.User.ReturnBook;
 import com.littleheap.User.UserInterface;
 
@@ -40,6 +42,8 @@ public class MainInterface extends JFrame implements ActionListener{
 	public static BorrowBook borrowJPanel = new BorrowBook();
 	public static BorrowBook_Information borrowInfoJPanel = new BorrowBook_Information();
 	public static ReturnBook returnJPanel = new ReturnBook();
+	public static ProlongBook prolongJPanel = new ProlongBook();
+	public static PersonalInformation personalJPanel = new PersonalInformation();
 	
 	private JTextField tf_user;
 	private JTextField tf_password;
@@ -60,6 +64,8 @@ public class MainInterface extends JFrame implements ActionListener{
 	private static boolean flage_borrow = false;
 	private static boolean flage_borrowInfo = false;
 	private static boolean flage_return = false;
+	private static boolean flage_prolong = false;
+	private static boolean flage_personal = false;
 	private boolean flage = false;
 	private static Container container;
 	private JLabel label;
@@ -324,12 +330,43 @@ public class MainInterface extends JFrame implements ActionListener{
 			returnJPanel.setVisible(true);
 		}
 	}
-	//Borrow->User
+	//Return->User
 	public static void ReturentoUser() {
 		returnJPanel.setVisible(false);
 		userJPanel.setVisible(true);
 	}
-	
+	//User->Prolong
+	public static void UsertoProlong() {
+		if(!flage_prolong) {
+			userJPanel.setVisible(false);
+			container.add(prolongJPanel);
+			flage_prolong = true;
+		}else {
+			userJPanel.setVisible(false);
+			prolongJPanel.setVisible(true);
+		}
+	}
+	//Prolong->User
+	public static void ProlongtoUser() {
+		prolongJPanel.setVisible(false);
+		userJPanel.setVisible(true);
+	}
+	//User->Personal
+	public static void UsertoPersonal() {
+		if(!flage_personal) {
+			userJPanel.setVisible(false);
+			container.add(personalJPanel);
+			flage_personal = true;
+		}else {
+			userJPanel.setVisible(false);
+			personalJPanel.setVisible(true);
+		}
+	}
+	//Personal->User
+	public static void PersonaltoUser() {
+		personalJPanel.setVisible(false);
+		userJPanel.setVisible(true);
+	}
 		
 	//µÇÂ¼×¢²áÊÂ¼şº¯Êı
 	@Override

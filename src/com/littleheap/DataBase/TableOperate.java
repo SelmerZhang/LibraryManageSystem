@@ -318,7 +318,7 @@ public class TableOperate {
             Statement stmt = conn.createStatement(); //创建Statement对象
             System.out.println("成功连接到数据库-insertBook");
 
-            String sql = "insert into "+classname+"Book"+" values('"+number+"','"+classnumber+"','"+name+"','"+classname+"','"+price+"','"+state+"','"+total+"',null,null,null);";    //要执行的SQL
+            String sql = "insert into "+classname+"Book"+" values('"+number+"','"+classnumber+"','"+name+"','"+classname+"','"+price+"','"+state+"','"+total+"','null','null','null');";    //要执行的SQL
             
             PreparedStatement stmts = conn.prepareStatement(sql);
             stmts.executeUpdate();  
@@ -522,7 +522,7 @@ public class TableOperate {
             }
     }
     
-    //还书更新信息
+    //还书更新书籍数据库信息
     public static void returnBook_Update(String classname,String number,String user,String dateoff) {
     	try{
             //调用Class.forName()方法加载驱动程序
@@ -558,7 +558,7 @@ public class TableOperate {
                 e.printStackTrace();
             }
     }
-    //还书更新用户的数据库
+    //还书更新用户的数据库信息
     public static void returnBook_Delete(String number,String user) {
     	try{
             //调用Class.forName()方法加载驱动程序
@@ -585,4 +585,71 @@ public class TableOperate {
                 e.printStackTrace();
             }
     }
+    //续借更新两者数据库信息
+    public static void prolongBook_Update(String classname,String number,String dateoff,String user) {
+    	try{
+            //调用Class.forName()方法加载驱动程序
+            Class.forName("com.mysql.jdbc.Driver");
+            System.out.println("成功加载MySQL驱动-prolongBook_Update");
+                
+            String url=Information.JDBC_URL;    //JDBC的URL    
+            Connection conn;
+
+            conn = DriverManager.getConnection(url,Information.username,Information.password);
+            Statement stmt = conn.createStatement(); //创建Statement对象
+            System.out.println("成功连接到数据库-prolongBook_Update");
+
+            String sql = "update "+classname+"Book set dateoff = '"+dateoff+"' where number = '"+number+"';\n";    //要执行的SQL
+            PreparedStatement stmts_state = conn.prepareStatement(sql);
+            stmts_state.executeUpdate();  
+            stmts_state.close();
+            
+            sql = "update "+user+"Customer set dateoff = '"+dateoff+"' where number = '"+number+"';\n";
+            PreparedStatement stmts_current = conn.prepareStatement(sql);
+            stmts_current.executeUpdate();  
+            stmts_current.close();
+            
+            stmt.close();
+            conn.close();
+            }catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+    }
+    
+  //查询个人图书信息
+    public static void search_personal(String user) {
+    	Information.bookarray.clear();
+    	try{
+    		
+            //调用Class.forName()方法加载驱动程序
+            Class.forName("com.mysql.jdbc.Driver");
+            System.out.println("成功加载MySQL驱动-search_personal");
+                
+            String url=Information.JDBC_URL;    //JDBC的URL    
+            Connection conn;
+
+            conn = DriverManager.getConnection(url,Information.username,Information.password);
+            Statement stmt = conn.createStatement(); //创建Statement对象
+            System.out.println("成功连接到数据库-search_personal");
+
+            String sql = "select * from "+user+"Customer;";    //要执行的SQL
+            ResultSet rs = stmt.executeQuery(sql);//创建数据对象
+                while (rs.next()){
+                	Book book = new Book();
+                    book.number = rs.getString(1);
+                    book.classname = rs.getString(2);
+                    book.name = rs.getString(3);
+                    book.dateoff = rs.getString(4);
+                    Information.bookarray.add(book);
+                }
+                rs.close();
+                stmt.close();
+                conn.close();
+            }catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+    }
+    
 }

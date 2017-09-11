@@ -88,14 +88,17 @@ public class BorrowBook_Information extends JPanel implements ActionListener {
             for(int j=0;j<(19-Information.bookarray.get(i).name.length());j++) {
             	info = info +" ";
             }			
-            info = info+"      "+Information.bookarray.get(i).classname+"       ";
+            info = info+"      "+Information.bookarray.get(i).classname+"        ";
             info = info+Information.bookarray.get(i).price+"      ";
-            info = info+Information.bookarray.get(i).state+"       ";
+            info = info+Information.bookarray.get(i).state;
+            for(int j=0;j<(9-Information.bookarray.get(i).state.length());j++) {
+            	info = info +" ";
+            }	
             info = info+Information.bookarray.get(i).current;
             for(int j=0;j<(6-Information.bookarray.get(i).current.length());j++) {
             	info = info +" ";
             }	
-            info = info+"    "+Information.bookarray.get(i).dateoff+"\n";
+            info = info+"     "+Information.bookarray.get(i).dateoff+"\n";
             
 		}
 		textArea.setText(info);

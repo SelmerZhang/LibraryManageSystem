@@ -39,7 +39,7 @@ public class BorrowBook extends JPanel implements ActionListener{
 		label = new JLabel("\u501F\u4E66\u7CFB\u7EDF");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("ËÎÌו", Font.BOLD, 40));
-		label.setBounds(530, 20, 294, 105);
+		label.setBounds(530, 62, 294, 105);
 		add(label);
 		
 		lb_classname = new JLabel("\u4E66\u5E93\u7C7B\u522B\u540D\u79F0\uFF1A");
