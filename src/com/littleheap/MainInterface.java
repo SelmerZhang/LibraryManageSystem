@@ -93,7 +93,7 @@ public class MainInterface extends JFrame implements ActionListener{
 		//账号输入框
 		tf_user = new JTextField();
 		tf_user.setFont(new Font("宋体", Font.BOLD, 35));
-		tf_user.setBounds(443, 248, 526, 75);
+		tf_user.setBounds(409, 248, 526, 75);
 		contentPane.add(tf_user);
 		tf_user.setColumns(10);
 		
@@ -101,19 +101,19 @@ public class MainInterface extends JFrame implements ActionListener{
 		tf_password = new JTextField();
 		tf_password.setFont(new Font("宋体", Font.BOLD, 35));
 		tf_password.setColumns(10);
-		tf_password.setBounds(443, 357, 526, 75);
+		tf_password.setBounds(409, 357, 526, 75);
 		contentPane.add(tf_password);
 		
 		//用户名标签
 		label_user = new JLabel("\u8D26\u53F7\uFF1A");
 		label_user.setFont(new Font("宋体", Font.BOLD, 35));
-		label_user.setBounds(318, 261, 116, 48);
+		label_user.setBounds(289, 261, 116, 48);
 		contentPane.add(label_user);
 		
 		//密码标签
 		label_password = new JLabel("\u5BC6\u7801\uFF1A");
 		label_password.setFont(new Font("宋体", Font.BOLD, 35));
-		label_password.setBounds(318, 370, 116, 48);
+		label_password.setBounds(289, 370, 116, 48);
 		contentPane.add(label_password);
 		
 		//普通用户单选按钮
@@ -121,14 +121,14 @@ public class MainInterface extends JFrame implements ActionListener{
 		rb_customer.setSelected(true);
 		rb_customer.setFont(new Font("宋体", Font.BOLD, 30));
 		rb_customer.setBackground(Color.WHITE);
-		rb_customer.setBounds(443, 515, 170, 37);
+		rb_customer.setBounds(409, 515, 170, 37);
 		contentPane.add(rb_customer);
 		
 		//管理人员单选按钮
 		rb_manager = new JRadioButton("\u7BA1\u7406\u4EBA\u5458");
 		rb_manager.setFont(new Font("宋体", Font.BOLD, 30));
 		rb_manager.setBackground(Color.WHITE);
-		rb_manager.setBounds(799, 515, 170, 37);
+		rb_manager.setBounds(765, 515, 170, 37);
 		contentPane.add(rb_manager);
 		//将选项按钮添加到一个按钮组
 		ButtonGroup bg=new ButtonGroup();// 初始化按钮组
@@ -139,7 +139,7 @@ public class MainInterface extends JFrame implements ActionListener{
 		btn_login = new JButton("\u767B\u5F55");
 		btn_login.setBackground(Color.LIGHT_GRAY);
 		btn_login.setFont(new Font("宋体", Font.BOLD, 35));
-		btn_login.setBounds(443, 634, 170, 48);
+		btn_login.setBounds(409, 634, 170, 48);
 		contentPane.add(btn_login);
 		
 		btn_login.addActionListener(this);
@@ -148,7 +148,7 @@ public class MainInterface extends JFrame implements ActionListener{
 		btn_register = new JButton("\u6CE8\u518C");
 		btn_register.setFont(new Font("宋体", Font.BOLD, 35));
 		btn_register.setBackground(Color.LIGHT_GRAY);
-		btn_register.setBounds(799, 634, 170, 48);
+		btn_register.setBounds(765, 634, 170, 48);
 		contentPane.add(btn_register);
 		
 		btn_register.addActionListener(this);
@@ -163,7 +163,7 @@ public class MainInterface extends JFrame implements ActionListener{
 		label = new JLabel("\u56FE\u4E66\u7BA1\u7406\u7CFB\u7EDF");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("宋体", Font.BOLD, 40));
-		label.setBounds(530, 20, 294, 105);
+		label.setBounds(529, 69, 294, 105);
 		contentPane.add(label);
 		
 		btn_changePassword.addActionListener(this);

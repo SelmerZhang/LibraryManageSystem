@@ -508,7 +508,7 @@ public class TableOperate {
             Statement stmt = conn.createStatement(); //创建Statement对象
             System.out.println("成功连接到数据库-borrowBook_Insert");
 
-            String sql = "insert into "+user+"Customer values('"+number+"','"+classname+"','unknow','"+dateoff+"');";    //要执行的SQL
+            String sql = "insert into "+user+"Customer values('"+number+"','"+classname+"','"+search_bookname(classname, number)+"','"+dateoff+"');";    //要执行的SQL
             
             PreparedStatement stmts = conn.prepareStatement(sql);
             stmts.executeUpdate();  
@@ -651,5 +651,63 @@ public class TableOperate {
                 e.printStackTrace();
             }
     }
-    
+	//是否存在该Table表
+    public static boolean isExist_Table(String table) {
+    	try{
+            //调用Class.forName()方法加载驱动程序
+            Class.forName("com.mysql.jdbc.Driver");
+            System.out.println("成功加载MySQL驱动-isExist_Table");
+                
+            String url=Information.JDBC_URL;    //JDBC的URL    
+            Connection conn;
+
+            conn = DriverManager.getConnection(url,Information.username,Information.password);
+            Statement stmt = conn.createStatement(); //创建Statement对象
+            System.out.println("成功连接到数据库-isExist_Table");
+
+            String sql = "show tables";    //要执行的SQL
+            ResultSet rs = stmt.executeQuery(sql);//创建数据对象
+                System.out.println("用户名"+"\t"+"密码");
+                while (rs.next()){
+                    if(table.equals(rs.getString(1))) {
+                    	return true;
+                    }
+                }
+                rs.close();
+                stmt.close();
+                conn.close();
+            }catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+		return false;
+    }
+	//查找书名
+    public static String search_bookname(String classname,String number) {
+    	try{
+            //调用Class.forName()方法加载驱动程序
+            Class.forName("com.mysql.jdbc.Driver");
+            System.out.println("成功加载MySQL驱动-search_bookname");
+                
+            String url=Information.JDBC_URL;    //JDBC的URL    
+            Connection conn;
+
+            conn = DriverManager.getConnection(url,Information.username,Information.password);
+            Statement stmt = conn.createStatement(); //创建Statement对象
+            System.out.println("成功连接到数据库-search_bookname");
+
+            String sql = "select * from "+classname+"book where number='"+number+"';";    //要执行的SQL
+            ResultSet rs = stmt.executeQuery(sql);//创建数据对象
+            while (rs.next()){
+                return rs.getString(3);
+            }
+            rs.close();
+            stmt.close();
+            conn.close();
+            }catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+    	return "null";
+    }
 }

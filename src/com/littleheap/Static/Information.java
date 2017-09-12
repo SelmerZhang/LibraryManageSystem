@@ -22,4 +22,7 @@ public class Information {
 	public static String manager = "";
 	//当前用户
 	public static String user = "";
+	//查询Table列表
+	public static ArrayList<String> tablearray = new ArrayList<String>();
+
 }
