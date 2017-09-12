@@ -3,6 +3,8 @@ package com.littleheap.Manager;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -161,12 +163,14 @@ public class UpdateBook extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == back) {
+			//点击返回按钮
 			MainInterface.UpdatetoManager();
 		}else if(e.getSource() == btn_submit) {
-			
+			//点击更新信息提交按钮
+			//旧信息
 			String old_number = tf_old_number.getText();
 			String old_classname = tf_old_classname.getText();
-			
+			//新信息
 			String number = tf_new_number.getText();
 			String classnumber = tf_new_classnumber.getText();
 			String name = tf_new_name.getText();
@@ -174,21 +178,23 @@ public class UpdateBook extends JPanel implements ActionListener {
 			String price = tf_new_price.getText();
 			String state = tf_new_state.getText();
 			
-			//删除旧书籍信息
-			TableOperate.deleteBook(old_number, old_classname);
-			//插入新书籍信息
-			TableOperate.insertBook(number, classnumber, name, classname, price, state, "1");
-			
-			tf_old_classname.setText("");
-			tf_old_number.setText("");
-			tf_new_number.setText("");
-			tf_new_classnumber.setText("");
-			tf_new_name.setText("");
-			tf_new_classname.setText("");
-			tf_new_price.setText("");
-			tf_new_state.setText("");
-			
+			if(!TableOperate.search_bookstate(old_classname, old_number).equals("null")) {
+				//删除旧书籍信息
+				TableOperate.deleteBook(old_number, old_classname);
+				//插入新书籍信息
+				TableOperate.insertBook(number, classnumber, name, classname, price, state, "1");
+				tf_old_classname.setText("");
+				tf_old_number.setText("");
+				tf_new_number.setText("");
+				tf_new_classnumber.setText("");
+				tf_new_name.setText("");
+				tf_new_classname.setText("");
+				tf_new_price.setText("");
+				tf_new_state.setText("");
+				JOptionPane.showMessageDialog(null, "成功", "更新信息成功", JOptionPane.OK_CANCEL_OPTION);
+			}else {
+				JOptionPane.showMessageDialog(null, "输入信息有误", "更新信息失败", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
-
 }

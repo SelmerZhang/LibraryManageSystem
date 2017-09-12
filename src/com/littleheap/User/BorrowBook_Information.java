@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class BorrowBook_Information extends JPanel implements ActionListener {
@@ -108,14 +109,30 @@ public class BorrowBook_Information extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == back) {
+			//点击返回按钮
 			MainInterface.BorrowInfotoBorrow();
 		}if(e.getSource() == btn_borrow) {
-			TableOperate.borrowBook_Update(Information.search_classname, tf_number.getText(), Information.user, tf_dateoff.getText().toString());
-			TableOperate.borrowBook_Insert(Information.search_classname, tf_number.getText(), Information.user, tf_dateoff.getText().toString());
-			tf_number.setText("");
-			tf_dateoff.setText("");
-			MainInterface.BorrowInfotoBorrow();
-			MainInterface.BorrowtoUser();
+			//点击借书按钮
+			//先判定是否有此书
+			if(TableOperate.search_bookname(Information.search_classname, tf_number.getText()).equals("null")) {
+				JOptionPane.showMessageDialog(null, "输入借书信息有误", "借书失败", JOptionPane.ERROR_MESSAGE);
+				tf_number.setText("");
+				tf_dateoff.setText("");
+			}else {
+				//判定此书是否已被借出
+				if(TableOperate.search_bookstate(Information.search_classname,  tf_number.getText()).equals("in")) {
+					TableOperate.borrowBook_Update(Information.search_classname, tf_number.getText(), Information.user, tf_dateoff.getText().toString());
+					TableOperate.borrowBook_Insert(Information.search_classname, tf_number.getText(), Information.user, tf_dateoff.getText().toString());
+					tf_number.setText("");
+					tf_dateoff.setText("");
+					MainInterface.BorrowInfotoBorrow();
+					MainInterface.BorrowtoUser();
+				}else {
+					JOptionPane.showMessageDialog(null, "该书已借出至："+TableOperate.search_bookdateoff(Information.search_classname, tf_number.getText()), "借书失败", JOptionPane.ERROR_MESSAGE);
+					tf_number.setText("");
+					tf_dateoff.setText("");
+				}
+			}
 		}
 	}
 }

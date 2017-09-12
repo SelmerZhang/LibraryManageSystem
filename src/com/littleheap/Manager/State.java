@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import com.littleheap.MainInterface;
@@ -73,18 +74,16 @@ public class State extends JPanel implements ActionListener{
 			Information.search_classname = classname;
 			
 			//查询该类图书信息
-			
-			TableOperate.search_classname(tf_classname.getText());
-			
-			System.out.print(Information.bookarray.size());
-			
-			MainInterface.StatetoStateInfo();
-			
-			State_Information.setTextArea();
-			
-			tf_classname.setText("");
-			
+			//判定是否存在查询类别
+			if(TableOperate.isExist_Table(classname+"book")) {
+				JOptionPane.showMessageDialog(null, "欢迎", "查询成功", JOptionPane.OK_CANCEL_OPTION);
+				TableOperate.search_classname(tf_classname.getText());
+				MainInterface.StatetoStateInfo();
+				State_Information.setTextArea();
+				tf_classname.setText("");
+			}else {
+				JOptionPane.showMessageDialog(null, "不存在该类别", "查询失败", JOptionPane.ERROR_MESSAGE);
+			}		
 		}
 	}
-
 }

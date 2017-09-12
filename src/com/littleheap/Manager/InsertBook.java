@@ -2,6 +2,8 @@ package com.littleheap.Manager;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -141,8 +143,11 @@ public class InsertBook extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == back) {
+			//点击返回按钮
 			MainInterface.InserttoManager();
 		}else if(e.getSource() == btn_submit) {
+			//点击提交按钮
+			//判定录入信息是否冲突
 			String number = tf_number.getText();
 			String classnumber = tf_classnumber.getText();
 			String name = tf_name.getText();
@@ -151,18 +156,20 @@ public class InsertBook extends JPanel implements ActionListener{
 			String state = tf_state.getText();
 			String total = tf_total.getText();
 			
-			//插入书籍信息
-			TableOperate.insertBook(number, classnumber, name, classname, price, state, total);
-			
-			tf_number.setText("");
-			tf_classnumber.setText("");
-			tf_name.setText("");
-			tf_classname.setText("");
-			tf_price.setText("");
-			tf_state.setText("");
-			tf_total.setText("");
-			
+			if(TableOperate.search_bookstate(classname, number).equals("null")) {
+				//插入书籍信息
+				TableOperate.insertBook(number, classnumber, name, classname, price, state, total);
+				tf_number.setText("");
+				tf_classnumber.setText("");
+				tf_name.setText("");
+				tf_classname.setText("");
+				tf_price.setText("");
+				tf_state.setText("");
+				tf_total.setText("");
+				JOptionPane.showMessageDialog(null, "恭喜", "书籍录入成功", JOptionPane.OK_CANCEL_OPTION);
+			}else {
+				JOptionPane.showMessageDialog(null, "书籍信息冲突", "书籍录入失败", JOptionPane.ERROR_MESSAGE);
+			}
 		}
-		
 	}
 }

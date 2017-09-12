@@ -74,6 +74,7 @@ public class ManagerInterface extends JPanel implements ActionListener{
 
 	}
 
+	//设置右上角当前管理员
 	public static void setManager() {
 		lb_manager.setText("当前管理员："+Information.manager);
 	}

@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import com.littleheap.MainInterface;
@@ -69,22 +70,17 @@ public class BorrowBook extends JPanel implements ActionListener{
 		}else if(e.getSource() == btn_search) {
 			
 			String classname = tf_classname.getText();
-			
 			Information.search_classname = classname;
 			
 			//查询该类图书信息
-			
-			TableOperate.search_classname(tf_classname.getText());
-			
-			System.out.print(Information.bookarray.size());
-			
-			MainInterface.BorrowtoBorrowInfo();
-			
-			BorrowBook_Information.setTextArea();
-			
-			tf_classname.setText("");
-			
+			if(TableOperate.isExist_Table(classname+"book")) {
+				TableOperate.search_classname(tf_classname.getText());		
+				MainInterface.BorrowtoBorrowInfo();	
+				BorrowBook_Information.setTextArea();	
+				tf_classname.setText("");
+			}else {
+				JOptionPane.showMessageDialog(null, "不存在该类别", "查询失败", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
-
 }

@@ -3,6 +3,8 @@ package com.littleheap.Manager;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -79,11 +81,19 @@ public class NewClass extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == back) {
+			//点击返回按钮
 			MainInterface.NewClasstoManager();
 		}else if(e.getSource() == btn_submit){
-			TableOperate.newClass(tf_classnumber.getText(), tf_classname.getText());
-			tf_classnumber.setText("");
-			tf_classname.setText("");
+			//点击提交按钮
+			if(!TableOperate.isExist_Table(tf_classname.getText().toLowerCase()+"book")) {
+				TableOperate.newClass(tf_classnumber.getText(), tf_classname.getText());
+				tf_classnumber.setText("");
+				tf_classname.setText("");
+				JOptionPane.showMessageDialog(null, "恭喜", "添加新类别成功", JOptionPane.OK_CANCEL_OPTION);
+			}else {
+				JOptionPane.showMessageDialog(null, "该类别已存在", "添加新类别失败", JOptionPane.ERROR_MESSAGE);
+			}
+
 		}
 	}
 }

@@ -44,7 +44,7 @@ public class MainInterface extends JFrame implements ActionListener{
 	public static ReturnBook returnJPanel = new ReturnBook();
 	public static ProlongBook prolongJPanel = new ProlongBook();
 	public static PersonalInformation personalJPanel = new PersonalInformation();
-	
+	//主界面窗口
 	private JTextField tf_user;
 	private JTextField tf_password;
 	private JLabel label_user;
@@ -141,7 +141,6 @@ public class MainInterface extends JFrame implements ActionListener{
 		btn_login.setFont(new Font("宋体", Font.BOLD, 35));
 		btn_login.setBounds(409, 634, 170, 48);
 		contentPane.add(btn_login);
-		
 		btn_login.addActionListener(this);
 		
 		//注册按钮
@@ -150,7 +149,6 @@ public class MainInterface extends JFrame implements ActionListener{
 		btn_register.setBackground(Color.LIGHT_GRAY);
 		btn_register.setBounds(765, 634, 170, 48);
 		contentPane.add(btn_register);
-		
 		btn_register.addActionListener(this);
 		
 		//修改密码按钮
@@ -165,7 +163,6 @@ public class MainInterface extends JFrame implements ActionListener{
 		label.setFont(new Font("宋体", Font.BOLD, 40));
 		label.setBounds(529, 69, 294, 105);
 		contentPane.add(label);
-		
 		btn_changePassword.addActionListener(this);
 	}
 	
@@ -271,6 +268,7 @@ public class MainInterface extends JFrame implements ActionListener{
 		stateInfoJPanel.setVisible(false);
 		stateJPanel.setVisible(true);
 	}
+	
 	//Main->User
 	public static void MaintoUser() {
 		if(!flage_user) {
@@ -287,6 +285,7 @@ public class MainInterface extends JFrame implements ActionListener{
 		userJPanel.setVisible(false);
 		contentPane.setVisible(true);
 	}
+	
 	//User->Borrow
 	public static void UsertoBorrow() {
 		if(!flage_borrow) {
@@ -303,6 +302,7 @@ public class MainInterface extends JFrame implements ActionListener{
 		borrowJPanel.setVisible(false);
 		userJPanel.setVisible(true);
 	}
+	
 	//Borrow->BorrowInfo
 	public static void BorrowtoBorrowInfo() {
 		if(!flage_borrowInfo) {
@@ -319,6 +319,7 @@ public class MainInterface extends JFrame implements ActionListener{
 		borrowInfoJPanel.setVisible(false);
 		borrowJPanel.setVisible(true);
 	}
+	
 	//User->Return
 	public static void UsertoReturn() {
 		if(!flage_return) {
@@ -335,6 +336,7 @@ public class MainInterface extends JFrame implements ActionListener{
 		returnJPanel.setVisible(false);
 		userJPanel.setVisible(true);
 	}
+	
 	//User->Prolong
 	public static void UsertoProlong() {
 		if(!flage_prolong) {
@@ -351,6 +353,7 @@ public class MainInterface extends JFrame implements ActionListener{
 		prolongJPanel.setVisible(false);
 		userJPanel.setVisible(true);
 	}
+	
 	//User->Personal
 	public static void UsertoPersonal() {
 		if(!flage_personal) {
@@ -362,6 +365,7 @@ public class MainInterface extends JFrame implements ActionListener{
 			personalJPanel.setVisible(true);
 		}
 	}
+	
 	//Personal->User
 	public static void PersonaltoUser() {
 		personalJPanel.setVisible(false);
@@ -470,7 +474,6 @@ public class MainInterface extends JFrame implements ActionListener{
 					}
 				}
 			}
-			
 		}
 	}
 }
