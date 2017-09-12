@@ -87,43 +87,52 @@ insert into NatureBook values('N10','1','Buzz Nature       ','Nature','32','in',
 
 update NatureBook set total = '1';
 
-+--------+-------------+---------------------+-----------+-------+-------+-------+
-| number | classnumber | name                | classname | price | state | total |
-+--------+-------------+---------------------+-----------+-------+-------+-------+
-| N01    | 1           | Nature and Science  | Nature    | 25    | in    | 1     |
-| N02    | 1           | My Nature Science   | Nature    | 23    | in    | 1     |
-| N03    | 1           | Wonderful Nature    | Nature    | 21    | in    | 1     |
-| N04    | 1           | Amazing Nature      | Nature    | 22    | in    | 1     |
-| N05    | 1           | Good Science Nature | Nature    | 25    | in    | 1     |
-| N06    | 1           | People and Nature   | Nature    | 26    | in    | 1     |
-| N07    | 1           | Hello Nature        | Nature    | 14    | in    | 1     |
-| N08    | 1           | Goodbye Nature      | Nature    | 26    | in    | 1     |
-| N09    | 1           | Great Nature        | Nature    | 20    | in    | 1     |
-| N10    | 1           | Buzz Nature         | Nature    | 32    | in    | 1     |
-| N11    | 1           | New World Nature    | Nature    | 18    | in    | 1     |
-+--------+-------------+---------------------+-----------+-------+-------+-------+
++--------+-------------+---------------------+-----------+-------+-------+-------+---------+--------+---------+
+| number | classnumber | name                | classname | price | state | total | current | dateon | dateoff |
++--------+-------------+---------------------+-----------+-------+-------+-------+---------+--------+---------+
+| N01    | 1           | Nature and Science  | Nature    | 25    | in    | 1     | null    | null   | null    |
+| N02    | 1           | My Nature Science   | Nature    | 23    | in    | 1     | null    | null   | null    |
+| N03    | 1           | Wonderful Nature    | Nature    | 21    | in    | 1     | null    | null   | null    |
+| N04    | 1           | Amazing Nature      | Nature    | 22    | in    | 1     | null    | null   | null    |
+| N05    | 1           | Good Science Nature | Nature    | 25    | in    | 1     | null    | null   | null    |
+| N06    | 1           | People and Nature   | Nature    | 26    | in    | 1     | null    | null   | null    |
+| N07    | 1           | Hello Nature        | Nature    | 14    | in    | 1     | null    | null   | null    |
+| N08    | 1           | Goodbye Nature      | Nature    | 26    | in    | 1     | null    | null   | null    |
+| N09    | 1           | Great Nature        | Nature    | 20    | in    | 1     | null    | null   | null    |
+| N10    | 1           | Buzz Nature         | Nature    | 32    | in    | 1     | null    | null   | null    |
+| N11    | 1           | New World Nature    | Nature    | 18    | in    | 1     | null    | null   | null    |
++--------+-------------+---------------------+-----------+-------+-------+-------+---------+--------+---------+
+
+alter table NatureBook add column current VARCHAR(255); 
+
+alter table NatureBook add column dateon VARCHAR(255); 
+
+alter table NatureBook add column dateoff VARCHAR(255); 
+
 
 --------------------------------------------------------------
 
 CREATE TABLE ScienceBook(number VARCHAR(255) primary key,classnumber VARCHAR(255),name VARCHAR(255),classname VARCHAR(255),price VARCHAR(255),state VARCHAR(255),total VARCHAR(255) );
 
 
+select * from ScienceBook;
+
+alter table ScienceBook add column current VARCHAR(255); 
+
+alter table ScienceBook add column dateon VARCHAR(255); 
+
+alter table ScienceBook add column dateoff VARCHAR(255); 
+
+update scienceBook set current = '123' where number = 'S01';
+
+update scienceBook set dateoff = '20170920' where number = 'S01';
 
 
 
+--------------------------------------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
+create table user (number VARCHAR(255) primary key,classname VARCHAR(255),name VARCHAR(255),dateoff VARCHAR(255));
+                  (书籍编号                        类别名称               书名              期限                )
 
 
 
