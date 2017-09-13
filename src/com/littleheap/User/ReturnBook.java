@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import com.littleheap.MainInterface;
@@ -97,6 +98,10 @@ public class ReturnBook extends JPanel implements ActionListener{
 			String classname = tf_classname.getText();
 			String number = tf_number.getText();
 			String today = tf_today.getText();
+			
+			if(TableOperate.search_bookdateoff(classname, number)<Integer.parseInt(today)) {
+				JOptionPane.showMessageDialog(null, "谢谢合作", "请去缴纳罚款", JOptionPane.OK_CANCEL_OPTION);
+			}
 			
 			TableOperate.returnBook_Update(classname, number, Information.user, today);
 			TableOperate.returnBook_Delete(number, Information.user);

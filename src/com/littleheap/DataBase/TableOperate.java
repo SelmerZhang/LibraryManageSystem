@@ -740,7 +740,7 @@ public class TableOperate {
     }
     
 	//查找书籍还书日期
-    public static String search_bookdateoff(String classname,String number) {
+    public static int search_bookdateoff(String classname,String number) {
     	try{
             //调用Class.forName()方法加载驱动程序
             Class.forName("com.mysql.jdbc.Driver");
@@ -756,7 +756,7 @@ public class TableOperate {
             String sql = "select * from "+classname+"book where number='"+number+"';";    //要执行的SQL
             ResultSet rs = stmt.executeQuery(sql);//创建数据对象
             while (rs.next()){
-                return rs.getString(10);
+                return Integer.parseInt(rs.getString(10));
             }
             rs.close();
             stmt.close();
@@ -765,6 +765,6 @@ public class TableOperate {
             {
                 e.printStackTrace();
             }
-    	return "null";
+    	return 0;
     }
 }
